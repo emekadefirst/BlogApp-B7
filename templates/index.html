@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Bulletin – News, Entertainment & Sport</title>
+  <meta name="description" content="Daily Bulletin is a fast, responsive Tailwind CSS news site with breaking headlines, exclusive features, sport, showbiz and more." />
+  <meta property="og:title" content="Daily Bulletin – News, Entertainment & Sport" />
+  <meta property="og:description" content="Breaking headlines, exclusives and in‑depth features across news, entertainment, sport and lifestyle." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/1200/630" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+            body: ['ui-sans-serif', 'Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#0f172a',
+              light: '#1e293b'
+            },
+            accent: '#0ea5e9',
+            notice: '#ef4444'
+          },
+          boxShadow: {
+            soft: '0 6px 24px -8px rgba(0,0,0,0.15)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://picsum.photos" />
+  <style>
+    /* Smooth scrollbar for long pages */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 font-body">
+  <!-- Top Notice / Breaking Bar -->
+  <div class="bg-notice text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3 py-2">
+      <span class="inline-flex items-center rounded px-2 py-0.5 bg-white/20">Breaking</span>
+      <marquee behavior="scroll" direction="left" class="grow">Police confirm arrests after overnight protests • Markets climb as inflation cools • Champions League draw announced • Government unveils new housing plan</marquee>
+      <button id="themeBtn" class="hidden sm:inline-flex items-center gap-1 text-white/90 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 2a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm9-5a1 1 0 0 1 1 1v0a1 1 0 1 1-2 0v0a1 1 0 0 1 1-1ZM3 12a1 1 0 0 1 1-1H6a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm14.95-6.364a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 1 1-1.414 1.414L17.95 7.05a1 1 0 0 1 0-1.414ZM3.222 17.364a1 1 0 0 1 1.414 0l1.414 1.414A1 1 0 1 1 4.636 20.192l-1.414-1.414a1 1 0 0 1 0-1.414ZM11 19v2a1 1 0 1 0 2 0v-2a1 1 0 1 0-2 0Zm7 1h2a1 1 0 1 0 0-2h-2a1 1 0 1 0 0 2Z"/></svg>
+        Toggle theme
+      </button>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="border-b border-zinc-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button id="menuBtn" class="lg:hidden p-2 rounded hover:bg-zinc-100" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M3.75 5.5h16.5v1.5H3.75zM3.75 11.25h16.5v1.5H3.75zM3.75 17h16.5v1.5H3.75z"/></svg>
+        </button>
+        <a href="#" class="font-display text-3xl sm:text-4xl font-black tracking-tight text-brand">Daily <span class="text-accent">Bulletin</span></a>
+      </div>
+      <form class="hidden md:flex items-center gap-2 w-1/2 max-w-xl">
+        <label class="sr-only" for="q">Search</label>
+        <input id="q" type="search" placeholder="Search stories, topics & authors" class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-accent/40" />
+        <button type="submit" class="rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-zinc-50">Search</button>
+      </form>
+      <div class="hidden lg:flex items-center gap-4 text-sm">
+        <a href="#subscribe" class="px-4 py-2 rounded-xl bg-accent text-white font-medium shadow-soft hover:opacity-90">Subscribe</a>
+        <a href="#" class="px-3 py-2 hover:underline">Sign in</a>
+      </div>
+    </div>
+
+    <!-- Category Nav -->
+    <nav id="mainNav" class="border-t border-zinc-200 bg-white lg:block">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 py-3 text-[15px] font-medium">
+          <li><a class="hover:text-accent" href="#top">Top Stories</a></li>
+          <li><a class="hover:text-accent" href="#news">News</a></li>
+          <li><a class="hover:text-accent" href="#showbiz">Showbiz</a></li>
+          <li><a class="hover:text-accent" href="#sport">Sport</a></li>
+          <li><a class="hover:text-accent" href="#lifestyle">Lifestyle</a></li>
+          <li><a class="hover:text-accent" href="#money">Money</a></li>
+          <li><a class="hover:text-accent" href="#tech">Tech</a></li>
+          <li><a class="hover:text-accent" href="#opinion">Opinion</a></li>
+          <li class="ml-auto hidden lg:block"><a class="text-zinc-500 hover:text-accent" href="#">🇳🇬 NG Edition</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Off-canvas mobile menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    <aside class="absolute left-0 top-0 h-full w-80 max-w-[80%] bg-white shadow-xl p-6 overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <span class="font-display text-2xl font-extrabold">Menu</span>
+        <button id="closeMenu" class="p-2 rounded hover:bg-zinc-100" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M6.225 4.811 4.811 6.225 10.586 12l-5.775 5.775 1.414 1.414L12 13.414l5.775 5.775 1.414-1.414L13.414 12l5.775-5.775-1.414-1.414L12 10.586z"/></svg>
+        </button>
+      </div>
+      <form class="mt-4 flex items-center gap-2">
+        <input type="search" placeholder="Search…" class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:ring-2 focus:ring-accent/40" />
+        <button class="rounded-lg border border-zinc-300 px-3 py-2 text-sm">Go</button>
+      </form>
+      <ul class="mt-6 space-y-3 text-[15px] font-medium">
+        <li><a class="block hover:text-accent" href="#top">Top Stories</a></li>
+        <li><a class="block hover:text-accent" href="#news">News</a></li>
+        <li><a class="block hover:text-accent" href="#showbiz">Showbiz</a></li>
+        <li><a class="block hover:text-accent" href="#sport">Sport</a></li>
+        <li><a class="block hover:text-accent" href="#lifestyle">Lifestyle</a></li>
+        <li><a class="block hover:text-accent" href="#money">Money</a></li>
+        <li><a class="block hover:text-accent" href="#tech">Tech</a></li>
+        <li><a class="block hover:text-accent" href="#opinion">Opinion</a></li>
+      </ul>
+      <div class="mt-8 border-t pt-6 space-y-3">
+        <a href="#subscribe" class="block w-full text-center rounded-lg bg-accent text-white py-2 font-medium">Subscribe</a>
+        <a href="#" class="block w-full text-center rounded-lg border border-zinc-300 py-2 font-medium">Sign in</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Main -->
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+    <!-- Hero Grid -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Lead story -->
+      <article class="lg:col-span-7 bg-white rounded-2xl shadow-soft overflow-hidden">
+        <a href="#" class="block group">
+          <div class="aspect-[16/9] overflow-hidden">
+            <img src="https://picsum.photos/1280/720?random=1" alt="Lead story image" class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-flex items-center text-xs uppercase tracking-wide text-accent font-semibold">Exclusive</span>
+            <h2 class="mt-2 text-2xl sm:text-3xl font-display font-black leading-tight group-hover:underline">Inside the overnight operation that reshaped the election race</h2>
+            <p class="mt-2 text-zinc-600">Our reporters reveal how a late‑night strategy meeting turned into a dramatic power play with ripple effects across the capital.</p>
+            <div class="mt-4 flex items-center gap-3 text-sm text-zinc-500">
+              <span>By Jane Reporter</span>
+              <span>•</span>
+              <time datetime="2025-08-20">Aug 20, 2025</time>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Spotlight list -->
+      <div class="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-6">
+        <!-- Card -->
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[16/9] overflow-hidden">
+              <img src="https://picsum.photos/800/450?random=2" alt="Story image" class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl font-extrabold leading-snug group-hover:underline">Markets surge as inflation cools for third straight month</h3>
+              <p class="mt-1 text-sm text-zinc-600">Investors cheer fresh data; analysts warn of volatility ahead of policy meeting.</p>
+            </div>
+          </a>
+        </article>
+        <!-- Card -->
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[16/9] overflow-hidden">
+              <img src="https://picsum.photos/800/450?random=3" alt="Story image" class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl font-extrabold leading-snug group-hover:underline">Star striker seals record move after marathon talks</h3>
+              <p class="mt-1 text-sm text-zinc-600">Club insiders detail the clauses behind the blockbuster transfer.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Multi-column stream -->
+    <section id="news" class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Main feed -->
+      <div class="lg:col-span-8 space-y-6">
+        <!-- Big feature -->
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="grid md:grid-cols-5">
+              <div class="md:col-span-3 aspect-[16/10] md:aspect-auto">
+                <img src="https://picsum.photos/900/600?random=4" alt="Feature image" class="w-full h-full object-cover group-hover:opacity-95 transition" />
+              </div>
+              <div class="md:col-span-2 p-5 sm:p-6">
+                <span class="inline-flex text-xs font-semibold uppercase tracking-wide text-accent">Politics</span>
+                <h3 class="mt-2 text-2xl font-display font-black leading-snug group-hover:underline">What the latest polls really tell us</h3>
+                <p class="mt-2 text-zinc-600">Beyond the headline numbers, demographic shifts and turnout could decide everything.</p>
+                <div class="mt-4 flex items-center gap-3 text-sm text-zinc-500">
+                  <span>By Alex Analyst</span><span>•</span><time datetime="2025-08-19">Aug 19, 2025</time>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Masonry-like grid -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <!-- repeatable card component -->
+          <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+            <a href="#" class="block group">
+              <div class="aspect-[16/10] overflow-hidden"><img src="https://picsum.photos/700/440?random=5" class="w-full h-full object-cover group-hover:scale-105 transition" alt="thumb" /></div>
+              <div class="p-5">
+                <h4 class="text-lg font-extrabold group-hover:underline">City unveils car‑free plan for downtown weekends</h4>
+                <p class="mt-1 text-sm text-zinc-600">Transport chiefs promise pop‑up parks, markets and safer streets.</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+            <a href="#" class="block group">
+              <div class="aspect-[16/10] overflow-hidden"><img src="https://picsum.photos/700/441?random=6" class="w-full h-full object-cover group-hover:scale-105 transition" alt="thumb" /></div>
+              <div class="p-5">
+                <h4 class="text-lg font-extrabold group-hover:underline">How AI is changing your grocery bill</h4>
+                <p class="mt-1 text-sm text-zinc-600">From dynamic pricing to demand forecasting, the algorithms at work.</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+            <a href="#" class="block group">
+              <div class="aspect-[16/10] overflow-hidden"><img src="https://picsum.photos/700/442?random=7" class="w-full h-full object-cover group-hover:scale-105 transition" alt="thumb" /></div>
+              <div class="p-5">
+                <h4 class="text-lg font-extrabold group-hover:underline">What to know about the new student loan rules</h4>
+                <p class="mt-1 text-sm text-zinc-600">Eligibility, deadlines and the fine print explained.</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+            <a href="#" class="block group">
+              <div class="aspect-[16/10] overflow-hidden"><img src="https://picsum.photos/700/443?random=8" class="w-full h-full object-cover group-hover:scale-105 transition" alt="thumb" /></div>
+              <div class="p-5">
+                <h4 class="text-lg font-extrabold group-hover:underline">The hidden cost of fast fashion returns</h4>
+                <p class="mt-1 text-sm text-zinc-600">Retailers rethink generous policies as waste mounts.</p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="flex items-center justify-between border-t pt-6 mt-4">
+          <a href="#" class="px-4 py-2 rounded-lg border border-zinc-300 hover:bg-zinc-50">← Newer</a>
+          <a href="#" class="px-4 py-2 rounded-lg border border-zinc-300 hover:bg-zinc-50">Older →</a>
+        </nav>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-4 space-y-6">
+        <!-- Most read -->
+        <section class="bg-white rounded-2xl shadow-soft p-5">
+          <h3 class="text-xl font-display font-black">Most Read</h3>
+          <ol class="mt-4 space-y-3">
+            <li class="flex gap-3">
+              <span class="w-6 text-right font-bold text-accent">1</span>
+              <a href="#" class="hover:underline">Ten‑minute habits that boost your energy every day</a>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 text-right font-bold text-accent">2</span>
+              <a href="#" class="hover:underline">Airline apologises after mass delays strand passengers</a>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 text-right font-bold text-accent">3</span>
+              <a href="#" class="hover:underline">The tiny coastal town everyone is moving to</a>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 text-right font-bold text-accent">4</span>
+              <a href="#" class="hover:underline">Chef reveals the five pantry items that fix any meal</a>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 text-right font-bold text-accent">5</span>
+              <a href="#" class="hover:underline">What last night’s storm means for the weekend</a>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Newsletter -->
+        <section id="subscribe" class="bg-white rounded-2xl shadow-soft p-5">
+          <h3 class="text-xl font-display font-black">Get the Daily Briefing</h3>
+          <p class="mt-1 text-sm text-zinc-600">Top headlines, hand‑picked for your inbox. No spam, ever.</p>
+          <form class="mt-4 flex gap-2">
+            <label for="email" class="sr-only">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:ring-2 focus:ring-accent/40" />
+            <button class="rounded-lg bg-accent text-white px-4 py-2 text-sm font-medium">Subscribe</button>
+          </form>
+        </section>
+
+        <!-- Promo -->
+        <section class="bg-gradient-to-br from-white to-zinc-50 rounded-2xl border border-zinc-200 p-6">
+          <h3 class="text-xl font-display font-black">Download our app</h3>
+          <p class="mt-1 text-sm text-zinc-600">Personalised alerts, offline reading and more.</p>
+          <div class="mt-4 flex gap-3">
+            <a href="#" class="px-4 py-2 rounded-lg border border-zinc-300 hover:bg-zinc-50">App Store</a>
+            <a href="#" class="px-4 py-2 rounded-lg border border-zinc-300 hover:bg-zinc-50">Google Play</a>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <!-- Showbiz row -->
+    <section id="showbiz" class="mt-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-display font-black">Showbiz</h2>
+        <a href="#" class="text-sm text-accent hover:underline">More</a>
+      </div>
+      <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 4 cards -->
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/600/450?random=9" class="w-full h-full object-cover group-hover:scale-105 transition" alt="celeb"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Red carpet returns with bold looks and bigger risks</h4>
+            </div>
+          </a>
+        </article>
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/601/451?random=10" class="w-full h-full object-cover group-hover:scale-105 transition" alt="celeb"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Streaming giant drops surprise docu‑series overnight</h4>
+            </div>
+          </a>
+        </article>
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/602/452?random=11" class="w-full h-full object-cover group-hover:scale-105 transition" alt="celeb"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">The soundtrack everyone will be playing this summer</h4>
+            </div>
+          </a>
+        </article>
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/603/453?random=12" class="w-full h-full object-cover group-hover:scale-105 transition" alt="celeb"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Five festival moments you can’t miss</h4>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sport row -->
+    <section id="sport" class="mt-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-display font-black">Sport</h2>
+        <a href="#" class="text-sm text-accent hover:underline">More</a>
+      </div>
+      <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[16/9] overflow-hidden"><img src="https://picsum.photos/640/360?random=13" class="w-full h-full object-cover group-hover:scale-105 transition" alt="sport"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Champions set sights on historic three‑peat</h4>
+              <p class="text-sm text-zinc-600 mt-1">Fixture congestion could derail title defence, warn coaches.</p>
+            </div>
+          </a>
+        </article>
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[16/9] overflow-hidden"><img src="https://picsum.photos/641/361?random=14" class="w-full h-full object-cover group-hover:scale-105 transition" alt="sport"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Rookie shocks field with last‑lap overtake</h4>
+              <p class="text-sm text-zinc-600 mt-1">Crowd stunned as debutant claims first career win.</p>
+            </div>
+          </a>
+        </article>
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <a href="#" class="block group">
+            <div class="aspect-[16/9] overflow-hidden"><img src="https://picsum.photos/642/362?random=15" class="w-full h-full object-cover group-hover:scale-105 transition" alt="sport"/></div>
+            <div class="p-4">
+              <h4 class="font-extrabold group-hover:underline">Manager backs squad after pre‑season wobble</h4>
+              <p class="text-sm text-zinc-600 mt-1">“Fitness is building—we’ll peak at the right time.”</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <div class="font-display text-2xl font-black">Daily <span class="text-accent">Bulletin</span></div>
+        <p class="mt-2 text-sm text-zinc-600">Independent journalism for curious readers. © <span id="year"></span></p>
+      </div>
+      <div>
+        <h5 class="font-semibold">Sections</h5>
+        <ul class="mt-2 space-y-1 text-sm text-zinc-600">
+          <li><a class="hover:underline" href="#news">News</a></li>
+          <li><a class="hover:underline" href="#showbiz">Showbiz</a></li>
+          <li><a class="hover:underline" href="#sport">Sport</a></li>
+          <li><a class="hover:underline" href="#lifestyle">Lifestyle</a></li>
+          <li><a class="hover:underline" href="#tech">Tech</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold">Company</h5>
+        <ul class="mt-2 space-y-1 text-sm text-zinc-600">
+          <li><a class="hover:underline" href="#">About</a></li>
+          <li><a class="hover:underline" href="#">Careers</a></li>
+          <li><a class="hover:underline" href="#">Advertise</a></li>
+          <li><a class="hover:underline" href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold">Legal</h5>
+        <ul class="mt-2 space-y-1 text-sm text-zinc-600">
+          <li><a class="hover:underline" href="#">Terms</a></li>
+          <li><a class="hover:underline" href="#">Privacy</a></li>
+          <li><a class="hover:underline" href="#">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle (light/dark)
+    const themeBtn = document.getElementById('themeBtn');
+    function setTheme(dark) {
+      document.documentElement.classList.toggle('dark', dark);
+      document.body.classList.toggle('bg-zinc-900', dark);
+      document.body.classList.toggle('text-zinc-100', dark);
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const dark = !document.documentElement.classList.contains('dark');
+        localStorage.setItem('prefers-dark', dark ? '1' : '0');
+        setTheme(dark);
+      });
+    }
+    // Apply stored theme
+    setTheme(localStorage.getItem('prefers-dark') === '1');
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    function toggleMenu(show) {
+      mobileMenu.classList.toggle('hidden', !show);
+    }
+    if (menuBtn) menuBtn.addEventListener('click', () => toggleMenu(true));
+    if (closeMenu) closeMenu.addEventListener('click', () => toggleMenu(false));
+    mobileMenu?.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) toggleMenu(false);
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
